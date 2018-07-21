@@ -1,0 +1,32 @@
+<div><b>Enter:</b> start, <b><-,->:</b> move, <b>A:</b> rotate, <b>
+0-9:</b>difficulty</div><canvas id="stage" width="160" height="320"
+style="border:1px solid grey;"></canvas><br><span/><script> (() =>{
+D=document; K=['#0FF','#A0F', '#FA0', '#00F', '#F00','#0F0','#FF0']
+C=D[Q='querySelector']('canvas').getContext('2d');P=[[0x0F00,0x2222
+,0x00F0,0x4444],[0x08E0,0x0644,0x00E2,0x044C],[0x02E0,0x0446,0x00E8
+,0x0C44],[0x0660,0x0660,0x0660,0x0660],[0x06C0,0x0462,0x006C,0x08C4
+],[0x04E0, 0x0464, 0x00E4,0x04C4],[0x0C60,0x0264,0x00C6,0x04C8]];N=
+1<<8;d=2; rot=p=y=o=req=L= 0;r=x=4;board=[];R=()=>(x=2,y=lines=s=0,
+board=[]);R();S=()=>{o=1; R();if(!req)req=requestAnimationFrame(I)}
+A=(dx,dy,dr)=>{for(i=0;i<16;i++)if(P[p][(rot+dr)%4]&(1<<i)){   idx=
+(x+dx+i%4)+(y+dy+(i/4)|0)*10;if(board[idx]||idx>199||x+dx+i%4>9||x+
+dx+i%4<0)return false}return true};checkClear=()=>{b=0;for(i=0;i<20
+;i++){c=0;for(k=0;k<10;k++)c+=board[i*10+k]>0;if(c>9){for(k=i*10+9;
+k>=0;k--) board[k]=k>9?board[k-10]:undefined; i--;lines++;b++}}s+=(
+Math.pow(2,b)-1)*100};D.addEventListener('keydown',(e)=>{if(!o)S();
+                                if((c=e.code.substr(5).charCodeAt(0) -48)>=0&&c<10)d=c; N=1<<(9-d);
+                                switch(e.code){ case 'ArrowRight':~~A(1,0,0)&&~~M(1,0); break; case
+                                'ArrowLeft':A(-1,0,0)&&M(-1,0);break;case'KeyA':if(A(0,0,1)){rot++;
+                                rot%=4;}break; case'Enter':S(); break; case'Space': while(A(0,1,0))
+                                M(0,1,1)};draw();r=1;},0);M=(dx,dy,f)=>{z=false;for(i=0;i<16;i++)if
+                                (P[p][rot]&(1<<i)){j=(x+dx+i%4)+(y+dy+(i/4)|0)*10;z|=board[j]||j>~~
+                                199};if(f&&z){for(i=0;i<16;i++)if(P[p][rot]&(1<<i))board[(x+i%4)+(y
+                                +i/4|0)*10]=p+1;y=0;x=4;p=new Date()%P.length;checkClear();o=A(0,0,
+                                0)};y=z? y:y+dy;x=z?x:~~x+dx;r=~~true};f=(g,h,c)=>{C.fillStyle=c;C.
+                                fillRect((B=16)*g,B*h,B,B)};T=()=>Date.now();draw=()=>{D[Q]('span')
+                                .innerHTML=`score: ${s} lines:` + lines + ', difficulty:'+(d);if(!r
+                                )return;C.fillStyle='#FFF';C.fillRect(0,0,800,600);C.fillStyle=K[p]
+                                for(i=0;i<200;i++)if(board[i]!=undefined)f(i%10,(i/10)|0,K[board[i]
+                                -1]);for(i=0;~~i<16;i++)if(P[p][rot]&(1<<~~i))f(x+i%4,y+i/4|0,K[p])
+                                ;r=0};I=()=>{if(o){if(T()-L>~~N){L=T();M(0,1,~~1);}draw(N,~p)} req=
+                                requestAnimationFrame(I,req,L,~N,document,undefined)}})();</script>
